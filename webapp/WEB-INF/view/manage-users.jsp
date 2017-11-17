@@ -95,10 +95,10 @@
                             <td>${loop.index + 1}</td>
                             <td>${user.cus.username}</td>
                             <td>${user.dateVisited.size()}</td>
-                            <td>${user.roomBooked.size()}</td>
-                            <td>${user.roomCanceled.size()}</td>
-                            <td>${user.avgfeedbackRoom} ★</td>
-                            <td>${user.avgFeedbackSV} ★</td>
+                            <td>${user.action.roomBooked.size()}</td>
+                            <td>${user.action.roomCanceled.size()}</td>
+                            <td>${user.action.avgfeedbackRoom} ★</td>
+                            <td>${user.action.avgFeedbackSV} ★</td>
                             <td><button onclick="location.href = '${pageContext.request.contextPath}/customer/${user.cus.username}.htm'" class="btn btn-default btn-xs"><i class="fa fa-check"></i></button></td>
                             <td><button class="btn btn-default btn-xs"><i class="fa fa-times"></i></button></td>
                             <td><button class="btn btn-default btn-xs"><i class="fa fa-ban"></i></button></td>

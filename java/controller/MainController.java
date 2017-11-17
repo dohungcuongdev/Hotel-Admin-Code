@@ -255,7 +255,7 @@ public class MainController {
     @RequestMapping(value = "user/{username}", method = RequestMethod.GET)
     public String singleUser(@PathVariable(value = "username") String username, ModelMap model) {
         initialize(model);
-        Customer cus = userService.getCustomerByName(username);
+        Customer cus = userService.getCustomerByUsername(username);
         cus.setActivity(userService.getAllActivityByUserName(username));
         model.put("customer", cus);
         return "user";
