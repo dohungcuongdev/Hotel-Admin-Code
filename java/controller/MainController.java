@@ -8,6 +8,8 @@ package controller;
 import java.io.IOException;
 import model.user.Administrator;
 import statics.AppData;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,6 +24,7 @@ import model.hotel.HotelRoom;
 import model.hotel.HotelService;
 import model.user.Customer;
 import model.user.tracking.FollowUsers;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -29,24 +32,41 @@ import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 import services.HotelItemService;
-import services.impl.HotelItemServiceImpl;
 import services.UserService;
-import services.impl.UserServiceImpl;
-import services.impl.ApplicationServiceImpl;
 import services.ApplicationService;
+
+
+import services.TestService;
 
 /**
  *
  * @author Do Hung Cuong
  */
+
 @Controller
 @RequestMapping(value = "/")
 public class MainController {
+	
+	@Autowired
+	private TestService testService;
 
-    private final UserService userService = new UserServiceImpl();
-    private final HotelItemService hotelItemService = new HotelItemServiceImpl();
-    private final ApplicationService appService = new ApplicationServiceImpl();
 
+    //index
+    @RequestMapping(value = "test", method = RequestMethod.GET)
+    public String test(ModelMap model) {
+        model.put("test", testService.getName());
+        return "test";
+    }
+
+	@Autowired
+    private UserService userService;
+	
+	@Autowired
+    private HotelItemService hotelItemService;
+	
+	@Autowired
+    private ApplicationService appService;
+    
     //index
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public String index(ModelMap model) {

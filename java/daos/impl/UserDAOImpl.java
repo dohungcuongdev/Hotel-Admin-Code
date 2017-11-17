@@ -18,15 +18,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.springframework.stereotype.Repository;
+
 import model.user.tracking.ChartData;
 import model.user.tracking.FollowUsers;
-import statics.provider.DateTimeCalculator;
-import statics.provider.MathCalculator;
+
+import static statics.provider.DateTimeCalculator.formatMillisecond;
+import static statics.provider.DateTimeCalculator.getDateTime;
+import static statics.provider.MathCalculator.round;
 
 /**
  *
  * @author HUNGCUONG
  */
+
+@Repository
 public class UserDAOImpl implements UserDAO {
 
     private final Gson gson = new Gson();
@@ -46,11 +53,11 @@ public class UserDAOImpl implements UserDAO {
             FollowUsers fu = listFollowUsers.get(i);
             if (i == size - 1) {
                 fu.setDuration(0);
-                fu.setDurationTime(DateTimeCalculator.formatMillisecond(0));
+                fu.setDurationTime(formatMillisecond(0));
             } else {
                 int duration = listFollowUsers.get(i + 1).getDuration();
                 fu.setDuration(duration);
-                fu.setDurationTime(DateTimeCalculator.formatMillisecond(duration));
+                fu.setDurationTime(formatMillisecond(duration));
             }
             listFollowUsers.set(i, fu);
         }
@@ -65,7 +72,7 @@ public class UserDAOImpl implements UserDAO {
             DBObject obj = cursor.next();
             FollowUsers followUsers = gson.fromJson(obj + "", FollowUsers.class);
             followUsers.setId(obj.get("_id") + "");
-            followUsers.setDate_access(DateTimeCalculator.getDateTime(obj.get("created_at") + ""));
+            followUsers.setDate_access(getDateTime(obj.get("created_at") + ""));
             listFollowUsers.add(followUsers);
         }
         return fixFollowUsers(listFollowUsers);
@@ -129,7 +136,7 @@ public class UserDAOImpl implements UserDAO {
         Map m = getMapFollowUsersCountry(list);
         for (Object key : m.keySet()) {
             int quantity = Integer.parseInt(m.get(key) + "");
-            l.add(new ChartData(key + "", quantity, MathCalculator.round(quantity * 100.0 / totalChartData, 2)));
+            l.add(new ChartData(key + "", quantity, round(quantity * 100.0 / totalChartData, 2)));
         }
         return l;
     }

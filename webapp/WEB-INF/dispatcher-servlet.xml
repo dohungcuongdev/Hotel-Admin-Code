@@ -24,8 +24,9 @@
 	</bean>
 	<context:annotation-config />
 	<context:component-scan base-package="controller" />
-	<context:component-scan base-package="dao" />
-	<context:component-scan base-package="service" />
+	<context:component-scan base-package="daos" />
+	<context:component-scan base-package="services" />
+	<context:component-scan base-package="database" />
 
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -60,7 +61,4 @@
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
-
-	<!-- Database Configuration -->
-	<import resource="DataSource.xml" />
 </beans>

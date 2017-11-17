@@ -5,39 +5,55 @@
  */
 package daos.impl;
 
-import daos.CustomerDAO;
-import com.google.gson.Gson;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
-import daos.ActivityDAO;
-import daos.UserDAO;
-import database.MongoDBConnector;
+import static statics.provider.DateTimeCalculator.getDateTime;
+import static statics.provider.MathCalculator.round;
+
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.google.gson.Gson;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+
+import daos.ActivityDAO;
+import daos.CustomerDAO;
+import daos.TestDAO;
+import daos.UserDAO;
+import database.MongoDBConnector;
+import model.user.Customer;
 import model.user.tracking.ActionTracking;
 import model.user.tracking.Activity;
 import model.user.tracking.CustomerBehavior;
 import model.user.tracking.DataCollection;
 import model.user.tracking.FeedbackRoom;
-import model.user.Customer;
-import statics.provider.DateTimeCalculator;
-import statics.provider.MathCalculator;
 
 /**
  *
  * @author Do Hung Cuong
  */
+
+@Repository
 public class CustomerDAOImpl implements CustomerDAO {
 
 	private final Gson gson = new Gson();
-	private final ActivityDAO activityDAO = new ActivityDAOImpl();
-	private final UserDAO userDAO = new UserDAOImpl();
+	
+	@Autowired
+	private ActivityDAO activityDAO;
+	
+	@Autowired
+	private UserDAO userDAO ;
+	
+	@Autowired
+	private TestDAO testDAO ;
+	
 	private DBCollection collection;
 
 	{
@@ -57,7 +73,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 		while (cursor.hasNext()) {
 			DBObject obj = cursor.next();
 			cus = gson.fromJson(obj + "", Customer.class);
-			cus.setRegistered_date(DateTimeCalculator.getDateTime(obj.get("created_at") + ""));
+			cus.setRegistered_date(getDateTime(obj.get("created_at") + ""));
 		}
 		return cus;
 	}
@@ -69,7 +85,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 		while (cursor.hasNext()) {
 			DBObject obj = cursor.next();
 			Customer cus = gson.fromJson(obj + "", Customer.class);
-			cus.setRegistered_date(DateTimeCalculator.getDateTime(obj.get("created_at") + ""));
+			cus.setRegistered_date(getDateTime(obj.get("created_at") + ""));
 			cus.setDateVisit(getDateVisit(cus.getUsername()));
 			customers.add(cus);
 		}
@@ -129,8 +145,8 @@ public class CustomerDAOImpl implements CustomerDAO {
 			}
 
 		}
-		double avgfeedbackRoom = MathCalculator.round(starFBR * 1.0 / countFBR, 2);
-		double avgFeedbackSV = MathCalculator.round(starFB * 1.0 / countFB, 2);
+		double avgfeedbackRoom = round(starFBR * 1.0 / countFBR, 2);
+		double avgFeedbackSV = round(starFB * 1.0 / countFB, 2);
 		return new ActionTracking(roombooked, roomcanceled, feedbackroom, avgfeedbackRoom, avgFeedbackSV);
 
 	}
@@ -164,7 +180,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 				++count;
 			}
 		}
-		return MathCalculator.round(star * 1.0 / count, 2);
+		return round(star * 1.0 / count, 2);
 	}
 
 	public int getTotalStarRoomFeedback(String username) {
@@ -184,7 +200,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 				++count;
 			}
 		}
-		return MathCalculator.round(star * 1.0 / count, 2);
+		return round(star * 1.0 / count, 2);
 	}
 
 	public double getTotalStarFeedback(String username) {
