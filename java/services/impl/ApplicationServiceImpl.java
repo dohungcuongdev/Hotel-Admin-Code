@@ -12,6 +12,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import services.ApplicationService;
 
+import statics.provider.FileUploader;
+import statics.provider.EmailSender;
+import statics.provider.StringUtils;
+
 /**
  *
  * @author HUNGCUONG
@@ -20,19 +24,20 @@ import services.ApplicationService;
 @Service
 public class ApplicationServiceImpl implements ApplicationService {
 
-    @Override
-    public String uploadfile(CommonsMultipartFile commonsMultipartFiles, HttpServletRequest request, ModelMap model, String itemType) {
-        return uploadfile(commonsMultipartFiles, request, model, itemType);
-    }
+	@Override
+	public String uploadfile(CommonsMultipartFile commonsMultipartFiles, HttpServletRequest request, ModelMap model,
+			String itemType) {
+		return FileUploader.uploadfile(commonsMultipartFiles, request, model, itemType);
+	}
 
-    @Override
-    public String sendEmail(String message, String sendto, String subject) {
-        return sendEmail(message, sendto, subject);
-    }
+	@Override
+	public String sendEmail(String message, String sendto, String subject) {
+		return EmailSender.sendEmail(message, sendto, subject);
+	}
 
-    @Override
-    public String removeAccent(String originalString) {
-        return removeAccent(originalString);
-    }
-    
+	@Override
+	public String removeAccent(String originalString) {
+		return StringUtils.removeAccent(originalString);
+	}
+
 }

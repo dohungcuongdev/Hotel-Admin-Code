@@ -51,7 +51,6 @@ public class EmailSender {
         } catch (AddressException ex) {
             return AppData.WRONG_EMAIL_ADDRESS;
         } catch (MessagingException ex) {
-        	ex.printStackTrace();
             return AppData.ERROR_MESSAGE;
         }
         return AppData.EMAIL_SENT;

@@ -8,13 +8,8 @@ package statics;
 import daos.impl.ActivityDAOImpl;
 import model.user.Administrator;
 import daos.impl.AdminDAOImpl;
-import database.MongoDBConnector;
-
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Properties;
-
 import model.user.tracking.Activity;
 
 /**
@@ -23,6 +18,10 @@ import model.user.tracking.Activity;
  */
 
 public class AppData {
+    
+    public static final String DATABASE = "HotelBookingReservationsSystem";
+    public static final String DATABASE_HOST = "localhost";
+    public static final int DATABASE_PORT = 27017;
     
     public static final String EMAIL = "cuongvip1295@gmail.com";
     public static final String EMAILPASSWORD = "Cuong@123";
