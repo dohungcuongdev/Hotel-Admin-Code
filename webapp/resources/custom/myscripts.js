@@ -182,166 +182,165 @@ function sortAlpha(n, myTable) {
     }
 }
 
-    function sortNum(n, myTable) {
-        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-        table = document.getElementById(myTable);
-        switching = true;
-        //Set the sorting direction to ascending:
-        dir = "asc";
-        /*Make a loop that will continue until
-         no switching has been done:*/
-        while (switching) {
-            //start by saying: no switching is done:
-            switching = false;
-            rows = table.getElementsByTagName("TR");
-            /*Loop through all table rows (except the
-             first, which contains table headers):*/
-            for (i = 1; i < (rows.length - 1); i++) {
-                //start by saying there should be no switching:
-                shouldSwitch = false;
-                /*Get the two elements you want to compare,
-                 one from current row and one from the next:*/
-                x = rows[i].getElementsByTagName("TD")[n];
-                y = rows[i + 1].getElementsByTagName("TD")[n];
-                /*check if the two rows should switch place,
-                 based on the direction, asc or desc:*/
-                if (dir == "asc") {
-                    if (parseInt(x.innerHTML) > parseInt(y.innerHTML)) {
-                        //if so, mark as a switch and break the loop:
-                        shouldSwitch = true;
-                        break;
-                    }
-                } else if (dir == "desc") {
-                    if (parseInt(x.innerHTML) < parseInt(y.innerHTML)) {
-                        //if so, mark as a switch and break the loop:
-                        shouldSwitch = true;
-                        break;
-                    }
+function sortNum(n, myTable) {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById(myTable);
+    switching = true;
+    //Set the sorting direction to ascending:
+    dir = "asc";
+    /*Make a loop that will continue until
+     no switching has been done:*/
+    while (switching) {
+        //start by saying: no switching is done:
+        switching = false;
+        rows = table.getElementsByTagName("TR");
+        /*Loop through all table rows (except the
+         first, which contains table headers):*/
+        for (i = 1; i < (rows.length - 1); i++) {
+            //start by saying there should be no switching:
+            shouldSwitch = false;
+            /*Get the two elements you want to compare,
+             one from current row and one from the next:*/
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+            /*check if the two rows should switch place,
+             based on the direction, asc or desc:*/
+            if (dir == "asc") {
+                if (parseInt(x.innerHTML) > parseInt(y.innerHTML)) {
+                    //if so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
                 }
-            }
-            if (shouldSwitch) {
-                /*If a switch has been marked, make the switch
-                 and mark that a switch has been done:*/
-                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                switching = true;
-                //Each time a switch is done, increase this count by 1:
-                switchcount++;
-            } else {
-                /*If no switching has been done AND the direction is "asc",
-                 set the direction to "desc" and run the while loop again.*/
-                if (switchcount == 0 && dir == "asc") {
-                    dir = "desc";
-                    switching = true;
+            } else if (dir == "desc") {
+                if (parseInt(x.innerHTML) < parseInt(y.innerHTML)) {
+                    //if so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
                 }
             }
         }
-    }
-
-    function convertDate(originaldate) {
-        var temp1 = originaldate.substring(originaldate.length - 5);
-        var temp2 = originaldate.substring(0, 10);
-        var temp3 = originaldate.substring(10, 19);
-        return new Date(temp2 + temp1 + temp3);
-    }
-
-    function sortDate(n, myTable) {
-        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-        table = document.getElementById(myTable);
-        switching = true;
-        //Set the sorting direction to ascending:
-        dir = "asc";
-        /*Make a loop that will continue until
-         no switching has been done:*/
-        while (switching) {
-            //start by saying: no switching is done:
-            switching = false;
-            rows = table.getElementsByTagName("TR");
-            /*Loop through all table rows (except the
-             first, which contains table headers):*/
-            for (i = 1; i < (rows.length - 1); i++) {
-                //start by saying there should be no switching:
-                shouldSwitch = false;
-                /*Get the two elements you want to compare,
-                 one from current row and one from the next:*/
-                x = rows[i].getElementsByTagName("TD")[n];
-                y = rows[i + 1].getElementsByTagName("TD")[n];
-                /*check if the two rows should switch place,
-                 based on the direction, asc or desc:*/
-                if (dir == "asc") {
-                    if (convertDate(x.innerHTML) > convertDate(y.innerHTML)) {
-                        //if so, mark as a switch and break the loop:
-                        shouldSwitch = true;
-                        break;
-                    }
-                } else if (dir == "desc") {
-                    if (convertDate(x.innerHTML) < convertDate(y.innerHTML)) {
-                        //if so, mark as a switch and break the loop:
-                        shouldSwitch = true;
-                        break;
-                    }
-                }
-            }
-            if (shouldSwitch) {
-                /*If a switch has been marked, make the switch
-                 and mark that a switch has been done:*/
-                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        if (shouldSwitch) {
+            /*If a switch has been marked, make the switch
+             and mark that a switch has been done:*/
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            //Each time a switch is done, increase this count by 1:
+            switchcount++;
+        } else {
+            /*If no switching has been done AND the direction is "asc",
+             set the direction to "desc" and run the while loop again.*/
+            if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
                 switching = true;
-                //Each time a switch is done, increase this count by 1:
-                switchcount++;
-            } else {
-                /*If no switching has been done AND the direction is "asc",
-                 set the direction to "desc" and run the while loop again.*/
-                if (switchcount == 0 && dir == "asc") {
-                    dir = "desc";
-                    switching = true;
-                }
             }
         }
     }
+}
 
-    function deleteService(servicename) {
-        swal({
-            title: "Are you sure?",
-            text: "Delete this service now!",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Yes, delete it!",
-            closeOnConfirm: false
-        }, function () {
-            window.location.href = '${pageContext.request.contextPath}/remove-service/' + servicename + '.htm';
-        });
+function convertDate(originaldate) {
+    var temp1 = originaldate.substring(originaldate.length - 5);
+    var temp2 = originaldate.substring(0, 10);
+    var temp3 = originaldate.substring(10, 19);
+    return new Date(temp2 + temp1 + temp3);
+}
+
+function sortDate(n, myTable) {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById(myTable);
+    switching = true;
+    //Set the sorting direction to ascending:
+    dir = "asc";
+    /*Make a loop that will continue until
+     no switching has been done:*/
+    while (switching) {
+        //start by saying: no switching is done:
+        switching = false;
+        rows = table.getElementsByTagName("TR");
+        /*Loop through all table rows (except the
+         first, which contains table headers):*/
+        for (i = 1; i < (rows.length - 1); i++) {
+            //start by saying there should be no switching:
+            shouldSwitch = false;
+            /*Get the two elements you want to compare,
+             one from current row and one from the next:*/
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+            /*check if the two rows should switch place,
+             based on the direction, asc or desc:*/
+            if (dir == "asc") {
+                if (convertDate(x.innerHTML) > convertDate(y.innerHTML)) {
+                    //if so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                }
+            } else if (dir == "desc") {
+                if (convertDate(x.innerHTML) < convertDate(y.innerHTML)) {
+                    //if so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+        }
+        if (shouldSwitch) {
+            /*If a switch has been marked, make the switch
+             and mark that a switch has been done:*/
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            //Each time a switch is done, increase this count by 1:
+            switchcount++;
+        } else {
+            /*If no switching has been done AND the direction is "asc",
+             set the direction to "desc" and run the while loop again.*/
+            if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+            }
+        }
     }
+}
 
-    function deleteRoom(roomname) {
-        swal({
-            title: "Are you sure?",
-            text: "Delete this room now!",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Yes, delete it!",
-            closeOnConfirm: false
-        }, function () {
-            window.location.href = '${pageContext.request.contextPath}/remove-room/' + roomname + '.htm';
-        });
-    }
+function deleteService(servicename) {
+    swal({
+        title: "Are you sure?",
+        text: "Delete this service now!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        closeOnConfirm: false
+    }, function () {
+        window.location.href = '${pageContext.request.contextPath}/remove-service/' + servicename + '.htm';
+    });
+}
 
-    function checkeditresult(r) {
-        if (r === undefined) {
-        } else if (r === "success")
-            swal('Congrats!', 'Edited successfully!', 'success');
-        else if (r !== '')
-            swal('Oops...!', r, 'error');
-    }
+function deleteRoom(roomname) {
+    swal({
+        title: "Are you sure?",
+        text: "Delete this room now!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        closeOnConfirm: false
+    }, function () {
+        window.location.href = '${pageContext.request.contextPath}/remove-room/' + roomname + '.htm';
+    });
+}
 
-    function checkSendEmail(r) {
-        console.log(r);
-        if (r === undefined || r === '') {
-        } else if (r === "Sent successfully")
-            swal('Congrats!', 'Email Sent successfully!', 'success');
-        else 
-            swal('Oops...!', r, 'error');
-    }
+function checkeditresult(r) {
+    if (r === undefined) {
+    } else if (r === "success")
+        swal('Congrats!', 'Edited successfully!', 'success');
+    else if (r !== '')
+        swal('Oops...!', r, 'error');
+}
 
+function checkSendEmail(r) {
+    console.log(r);
+    if (r === undefined || r === '') {
+    } else if (r === "Sent successfully")
+        swal('Congrats!', 'Email Sent successfully!', 'success');
+    else 
+        swal('Oops...!', r, 'error');
+}
 

@@ -55,6 +55,12 @@ public class MainController {
     @RequestMapping(value = "test", method = RequestMethod.GET)
     public String test(ModelMap model) {
         model.put("test", testService.getResource("database"));
+        initialize(model);
+        List<FollowUsers> list = userService.getListFollowUsers();
+        model.put("listFollowUsers", list);
+
+        model.put("mapFollowUsers", userService.getFollowUsersMap(list));
+        model.put("mapFollowUsersIP", userService.getFollowUsersMapByIP(list));
         return "test";
     }
 

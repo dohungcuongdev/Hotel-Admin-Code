@@ -8,17 +8,18 @@
                 IP Address Statistics
 
             </header>
-            <div class="panel-body table-responsive">
-                <div class="box-tools m-b-15">
-                    <div class="input-group">
-                        <input type="text" name="table_search" class="form-control input-sm pull-right" 
-                               style="width: 150px;" id="ip-stat-input" onkeyup="searchInputTable('ip-stat-input', 'ip-stat-table')" 
-                               placeholder="Search for ip address.." title="Type in a ip address"/>
-                        <div class="input-group-btn">
-                            <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-                        </div>
+            
+            <div class="box-tools m-b-15">
+                <div class="input-group">
+                    <input type="text" name="table_search" class="form-control input-sm pull-right" 
+                           style="width: 150px;" id="ip-stat-input" onkeyup="searchInputTable('ip-stat-input', 'ip-stat-table')" 
+                           placeholder="Search for ip address.." title="Type in a ip address"/>
+                    <div class="input-group-btn">
+                        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
                     </div>
                 </div>
+            </div>
+            <div class="panel-body table-responsive">
                 <table id="ip-stat-table">
                     <tr>
                         <th class="tr-p" onclick="sortNum(0, 'ip-stat-table')">No.</th>
@@ -46,19 +47,18 @@
         <div class="panel">
             <header class="panel-heading">
                 Page Access Statistics
-
             </header>
-            <div class="panel-body table-responsive" id="page-access-box">
-                <div class="box-tools m-b-15">
-                    <div class="input-group">
-                        <input type="text" name="table_search" class="form-control input-sm pull-right" 
-                               style="width: 150px;" id="page-access-input" onkeyup="searchInputTable('page-access-input', 'page-access-table')" 
-                               placeholder="Search for page access.." title="Type in a page access"/>
-                        <div class="input-group-btn">
-                            <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-                        </div>
+            <div class="box-tools m-b-15">
+                <div class="input-group">
+                    <input type="text" name="table_search" class="form-control input-sm pull-right" 
+                           style="width: 150px;" id="page-access-input" onkeyup="searchInputTable('page-access-input', 'page-access-table')" 
+                           placeholder="Search for page access.." title="Type in a page access"/>
+                    <div class="input-group-btn">
+                        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
                     </div>
                 </div>
+            </div>
+            <div class="panel-body table-responsive" id="page-access-box">
                 <table id="page-access-table">
                     <tr>
                         <th class="tr-p" onclick="sortNum(0, 'page-access-table')">No.</th>
