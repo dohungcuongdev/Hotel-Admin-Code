@@ -1,4 +1,3 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="common/sub-content.jspf"%>
 
@@ -28,7 +27,7 @@
                     </tr>
 
                     <c:forEach var="map" items="${mapFollowUsersIP}" varStatus="loop">
-                        <tr class="tr-p" onclick="location.href = '${pageContext.request.contextPath}/follow-user-ip/${map.key}.htm'">
+                        <tr class="tr-p" onclick="location.href = '${pageContext.request.contextPath}/follow-user-ip/${map.key}.html'">
                             <td>${loop.index + 1}</td>
                             <td>${map.key}</td>
                             <td>${map.value}</td>

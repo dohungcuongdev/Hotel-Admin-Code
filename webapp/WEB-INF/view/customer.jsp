@@ -1,7 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ include file="common/sub-content.jspf"%>
 
-
 <div class="row">
     <div class="col-lg-4">
         <section class="panel">
@@ -37,7 +36,7 @@
                             <i class="fa fa-times"></i>
                         </button> 
                         <strong class="tr-p" 
-                             onclick="location.href = '${pageContext.request.contextPath}/room/${roomBooked.data}.htm'"> ${roomBooked.date}! 
+                             onclick="location.href = '${pageContext.request.contextPath}/room/${roomBooked.data}.html'"> ${roomBooked.date}! 
                         </strong>
                         Room booked: ${roomBooked.data}
                     </div>
@@ -57,7 +56,7 @@
                             <i class="fa fa-times"></i>
                         </button> 
                         <strong class="tr-p" 
-                             onclick="location.href = '${pageContext.request.contextPath}/room/${roomCanceled.data}.htm'"> ${roomCanceled.date}! 
+                             onclick="location.href = '${pageContext.request.contextPath}/room/${roomCanceled.data}.html'"> ${roomCanceled.date}! 
                         </strong>
                         Room canceled: ${roomCanceled.data}
                     </div>
@@ -92,7 +91,7 @@
                             <i class="fa fa-times"></i>
                         </button> 
                         <strong class="tr-p" 
-                             onclick="location.href = '${pageContext.request.contextPath}/room/${feedbackroom.room}.htm'"> ${feedbackroom.date}! 
+                             onclick="location.href = '${pageContext.request.contextPath}/room/${feedbackroom.room}.html'"> ${feedbackroom.date}! 
                         </strong>
                         <br>Room feedback: ${feedbackroom.room}
                         <br>Feedback Score: ${feedbackroom.star} ★

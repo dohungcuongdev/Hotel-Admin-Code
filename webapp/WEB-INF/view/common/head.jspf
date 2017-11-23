@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html>
-
     <head>
         <meta charset="UTF-8">
         <title>Hotel Admin</title>
@@ -51,8 +50,7 @@
         
         
         <!-- My Styles -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/mystyles.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/custom/mystyles.css">
 
     </head>
-
     <body class="skin-black">

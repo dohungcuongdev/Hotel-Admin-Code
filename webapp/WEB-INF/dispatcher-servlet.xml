@@ -26,7 +26,6 @@
 	<context:component-scan base-package="controller" />
 	<context:component-scan base-package="daos" />
 	<context:component-scan base-package="services" />
-	<context:component-scan base-package="database" />
 
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -49,7 +48,7 @@
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<props>
-				<prop key="index.htm">index</prop>
+				<prop key="index.html">index</prop>
 			</props>
 		</property>
 	</bean>

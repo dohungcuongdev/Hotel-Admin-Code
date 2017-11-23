@@ -54,7 +54,7 @@ public class MainController {
     //index
     @RequestMapping(value = "test", method = RequestMethod.GET)
     public String test(ModelMap model) {
-        model.put("test", testService.getName());
+        model.put("test", testService.getResource("database"));
         return "test";
     }
 
@@ -71,9 +71,6 @@ public class MainController {
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public String index(ModelMap model) {
         initialize(model);
-        List<FollowUsers> list = userService.getListFollowUsers();
-        model.put("jsonchart", userService.getFollowUsersCountry(list));
-        model.put("listchartData", userService.getListFollowUsersChartData(list));
         return "index";
     }
 
@@ -248,8 +245,6 @@ public class MainController {
     @RequestMapping(value = "follow-user-chart", method = RequestMethod.GET)
     public String followUserChart(ModelMap model) {
         initialize(model);
-        List<FollowUsers> list = userService.getListFollowUsers();
-        model.put("jsonchart", userService.getFollowUsersCountry(list));
         return "follow-user-chart";
     }
 
@@ -349,6 +344,7 @@ public class MainController {
                 csvWriter.write(r, header);
             }
         } catch (IOException e) {
+        	e.printStackTrace();
         }
     }
 
