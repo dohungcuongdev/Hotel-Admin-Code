@@ -80,6 +80,4 @@
         <!-- /.box -->
     </div>
 </div>
-
-<%@ include file="common/follow-user.jspf"%>
 <%@ include file="common/footer.jspf"%>

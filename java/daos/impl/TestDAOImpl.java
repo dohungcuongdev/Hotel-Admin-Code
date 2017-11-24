@@ -54,7 +54,6 @@ public class TestDAOImpl implements TestDAO {
 			HttpEntity entity = response.getEntity();
 			jsonArray = new JSONArray(EntityUtils.toString(entity));
 		}
-		System.out.println(jsonArray);
 		return jsonArray;
 	}
 

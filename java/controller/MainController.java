@@ -247,6 +247,12 @@ public class MainController {
         model.put("mapFollowUsersIP", userService.getFollowUsersMapByIP(list));
         return "follow-users";
     }
+    
+    @RequestMapping(value = "view-statistics", method = RequestMethod.GET)
+    public String viewStatistics(ModelMap model) {
+        initialize(model);
+        return "view-statistics";
+    }
 
     @RequestMapping(value = "follow-user-chart", method = RequestMethod.GET)
     public String followUserChart(ModelMap model) {

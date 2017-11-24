@@ -1,6 +1,4 @@
-<!-- Chart code -->
-<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/custom/angular.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/resources/custom/chart-angular.js" type="text/javascript"></script>
 
 <div class="row" ng-app="chart" ng-controller="ChartController" >
     <div class="col-md-8">
