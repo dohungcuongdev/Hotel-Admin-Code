@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.user.tracking.Activity;
@@ -35,9 +37,6 @@ import services.HotelItemService;
 import services.UserService;
 import services.ApplicationService;
 
-
-import services.TestService;
-
 /**
  *
  * @author Do Hung Cuong
@@ -46,22 +45,6 @@ import services.TestService;
 @Controller
 @RequestMapping(value = "/")
 public class MainController {
-	
-	@Autowired
-	private TestService testService;
-
-
-    //index
-    @RequestMapping(value = "test", method = RequestMethod.GET)
-    public String test(ModelMap model) {
-        initialize(model);
-        List<FollowUsers> list = userService.getListFollowUsers();
-        model.put("listFollowUsers", list);
-
-        model.put("mapFollowUsers", userService.getPageAccessChartData(list));
-        model.put("mapFollowUsersIP", userService.getFollowUsersMapByIP(list));
-        return "follow-users";
-    }
 
 	@Autowired
     private UserService userService;
@@ -253,10 +236,19 @@ public class MainController {
         return "view-statistics";
     }
 
-    @RequestMapping(value = "follow-user-chart", method = RequestMethod.GET)
+    @RequestMapping(value = "country-chart", method = RequestMethod.GET)
     public String followUserChart(ModelMap model) {
         initialize(model);
-        return "follow-user-chart";
+        return "country-chart";
+    }
+
+    @RequestMapping(value = "page-access-chart", method = RequestMethod.GET)
+    public String test(ModelMap model) {
+        initialize(model);
+        Map m = userService.getPageAccessChartData(userService.getListFollowUsers());
+        model.put("mapFollowUsers", m);
+        model.put("jsonchart", userService.getJSONPageAccess(m));
+        return "page-access-chart";
     }
 
     @RequestMapping(value = "follow-user-ip/{ip}", method = RequestMethod.GET)

@@ -98,40 +98,28 @@ public class UserDAOImpl implements UserDAO {
 		Map m = new HashMap();
 		for (int i = 0; i < list.size(); i++) {
 			String key = list.get(i).getPage_access();
-			if(key.contains("/rooms-tariff")) {
+			if(key.contains("/rooms-tariff"))
 				key = "View Room";
-			}
-			else if(key.contains("book room")) {
+			else if(key.contains("book room"))
 				key = "Book Room";
-			}
-			else if(key.contains("cancel room")) {
+			else if(key.contains("cancel room"))
 				key = "Cancel Room";
-			}
-			else if(key.contains("filter in rooms") || key.contains("/room-details") || key.contains("search in rooms") || key.contains("click image in rooms")) {
+			else if(key.contains("filter in rooms") || key.contains("/room-details") || key.contains("search in rooms") || key.contains("click image in rooms"))
 				key = "Find Rooms";
-			}
-			else if(key.contains("filter in restaurant") || key.contains("/hotel-services") || key.contains("search in restaurant") || key.contains("click image in restaurant")) {
+			else if(key.contains("filter in restaurant") || key.contains("/hotel-services") || key.contains("search in restaurant") || key.contains("click image in restaurant"))
 				key = "View Restaurant";
-			}
-			else if(key.contains("feedback")) {
+			else if(key.contains("feedback"))
 				key = "Send Feedback";
-			}
-			else if(key.contains("click link /")) {
+			else if(key.contains("click link /"))
 				key = "View " + upperFirstChar(key.substring(12)) + " Page";
-			}
-			else if(key.contains("login")) {
+			else if(key.contains("login"))
 				key = "Login";
-			}
-			else if(key.contains("sign up")) {
+			else if(key.contains("sign up"))
 				key = "Sign Up";
-			}
-			else if(key.contains("register")) {
+			else if(key.contains("register"))
 				key = "Register";
-			}
-			else if(key.contains("/logout")) {
+			else if(key.contains("/logout"))
 				key = "Logout";
-			}
-			
 			if (m.containsKey(key)) {
 				m.replace(key, Integer.parseInt(m.get(key) + "") + 1);
 			} else {
@@ -139,6 +127,15 @@ public class UserDAOImpl implements UserDAO {
 			}
 		}
 		return m;
+	}
+	
+	@Override
+	public String getJSONPageAccess(Map m) {
+		StringBuilder jsonArray = new StringBuilder("[");
+		m.keySet().stream().forEach((key) -> {
+			jsonArray.append("{\"page_access\" : \"").append(key).append("\", \"visit_time\" : ").append(m.get(key)).append(", \"color\" : \"#CD0D74\"},");
+		});
+		return jsonArray.append("]").toString();
 	}
 
 	@Override
@@ -195,8 +192,7 @@ public class UserDAOImpl implements UserDAO {
 		StringBuilder jsonArray = new StringBuilder("[");
 		Map m = getMapFollowUsersCountry(list);
 		m.keySet().stream().forEach((key) -> {
-			Object value = m.get(key);
-			jsonArray.append("{\"country\" : \"").append(key).append("\", \"visits\" : ").append(value).append("},");
+			jsonArray.append("{\"country\" : \"").append(key).append("\", \"visits\" : ").append(m.get(key)).append("},");
 		});
 		return jsonArray.append("]").toString();
 	}

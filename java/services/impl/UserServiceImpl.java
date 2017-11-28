@@ -190,5 +190,10 @@ public class UserServiceImpl implements UserService {
 	public Map getPageAccessChartData(List<FollowUsers> list) {
 		return userDAO.getPageAccessChartData(list);
 	}
+
+	@Override
+	public String getJSONPageAccess(Map m) {
+		return userDAO.getJSONPageAccess(m);
+	}
     
 }

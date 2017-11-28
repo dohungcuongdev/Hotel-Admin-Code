@@ -25,7 +25,6 @@ import com.mongodb.DBObject;
 
 import daos.ActivityDAO;
 import daos.CustomerDAO;
-import daos.TestDAO;
 import daos.UserDAO;
 import database.MongoDBConnector;
 import model.user.Customer;
@@ -50,9 +49,6 @@ public class CustomerDAOImpl implements CustomerDAO {
 	
 	@Autowired
 	private UserDAO userDAO ;
-	
-	@Autowired
-	private TestDAO testDAO ;
 	
 	private DBCollection collection;
 
