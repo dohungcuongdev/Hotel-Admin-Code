@@ -2,7 +2,6 @@ package services.impl;
 
 import java.io.IOException;
 
-import org.apache.http.ParseException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ public class APIServiceImpl implements APIService {
 	}
 
 	@Override
-	public JSONArray getListFollowUsers() throws IOException, ParseException, JSONException {
+	public JSONArray getListFollowUsers() throws IOException, JSONException {
 		return testDAO.getListFollowUsers();
 	}
 

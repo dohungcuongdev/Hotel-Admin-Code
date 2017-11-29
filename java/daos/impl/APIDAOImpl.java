@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 import java.io.IOException;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.ParseException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -42,7 +41,7 @@ public class APIDAOImpl implements APIDAO {
 	}
 	
 	@Override
-	public JSONArray getListFollowUsers() throws IOException, ParseException, JSONException {
+	public JSONArray getListFollowUsers() throws IOException, JSONException {
 		HttpGet httpGetKeyAndId = new HttpGet(getResource("api.followuser"));
 		JSONArray jsonArray = null;
 		try (CloseableHttpClient httpClient = HttpClients.createDefault();

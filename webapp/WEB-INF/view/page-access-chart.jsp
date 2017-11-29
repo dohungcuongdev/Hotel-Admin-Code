@@ -6,8 +6,7 @@
     <div class="col-xs-12">
         <div class="panel">
             <header class="panel-heading">
-                Page Access Chart
-
+                Page Access Chart for ${ipaddress}
             </header>
             <div id="chartdiv"></div>
         </div>
@@ -18,7 +17,7 @@
     <div class="col-xs-12">
         <div class="panel">
             <header class="panel-heading">
-                Page Access Statistics
+                Page Access Statistics for ${ipaddress}
             </header>
             <div class="box-tools m-b-15">
                 <div class="input-group">
@@ -38,7 +37,7 @@
                         <th class="tr-p" onclick="sortNum(2, 'page-access-table')">Visit Times</th>
                     </tr>
 
-                    <c:forEach var="map" items="${mapFollowUsers}" varStatus="loop">
+                    <c:forEach var="map" items="${mapPageAccess}" varStatus="loop">
                         <tr>
                             <td>${loop.index + 1}</td>
                             <td>${map.key}</td>

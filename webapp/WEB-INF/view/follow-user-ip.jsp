@@ -36,6 +36,8 @@
                     </c:forEach>
                 </table>
             </div>
+            <br><center><button class="btn btn-danger" onclick="location.href = '${pageContext.request.contextPath}/page-access-chart/${ip}.html'">
+                    <i class="fa fa-bar-chart"></i><b> View Chart of this IP Address </b> </button></center><br>
             <!-- /.box-body -->
         </div>
         <!-- /.box -->
