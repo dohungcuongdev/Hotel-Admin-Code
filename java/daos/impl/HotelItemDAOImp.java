@@ -7,6 +7,7 @@ package daos.impl;
 
 import daos.HotelItemDAO;
 
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Repository;
 
 import com.mongodb.BasicDBObject;
@@ -31,8 +32,8 @@ public class HotelItemDAOImp implements HotelItemDAO {
     }
     
     @Override
-    public void deleteItem(String name) {
-        collection.remove(new BasicDBObject().append("name", name));
+    public void deleteItem(String id) {
+        collection.remove(new BasicDBObject().append("_id", new ObjectId(id)));
     }
 
 }
