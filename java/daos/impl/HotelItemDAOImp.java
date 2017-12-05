@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 
-import static statics.provider.ImageEditor.editImagebyName;
+import static statics.provider.ImageEditor.editImageByID;
 
 /**
  *
@@ -26,9 +26,9 @@ public class HotelItemDAOImp implements HotelItemDAO {
     protected DBCollection collection;
 
     @Override
-    public void editImage(String name, String img, String img2) {
-        editImagebyName(collection, name, "img", img);
-        editImagebyName(collection, name, "img2", img2);
+    public void editImage(String id, String img, String img2) {
+    	editImageByID(collection, id, "img", img);
+    	editImageByID(collection, id, "img2", img2);
     }
     
     @Override
