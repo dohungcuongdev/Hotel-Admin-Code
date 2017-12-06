@@ -13,16 +13,7 @@
             <div class="panel-body" id="noti-box"> 
                 <div class="alert alert-danger">
                     <button data-dismiss="alert" class="close close-sm" type="button"></button>
-                    <strong>${activity.time}!</strong>
-                    <h5>Username: ${activity.username}</h5>
-                    <h5>Full Name: ${activity.fullname}</h5>
-                    <h5>Email: ${activity.email}</h5>
-                    <h5>Phone: ${activity.phone}</h5>
-                    <h5>Details: ${activity.details}</h5>
-                    <h5>Note: ${activity.note}</h5>
-                    <h5>Response: ${activity.response}</h5>
-                    <h5>Contents: </h5>
-                    <p>${activity.content}</P>
+                    <%@ include file="common/noti1.jspf"%>
                 </div>
             </div>
         </section>
@@ -87,7 +78,7 @@
             <div class="panel-body">
                 <div class="twt-area">
                     <form action="${pageContext.request.contextPath}/send-mail.html" method="post" accept-charset="UTF-8">
-                        <textarea class="form-control" name="message" placeholder="Write something on reply.." rows="14">Dear ${activity.fullname}, &#13;&#13;Thank you for your interest in our hotel. This email is to acknowledge the receipt of your email and thank you for sending us your request. We will carefully review your request. Should your request match our ability, we will contact you soon. In other cases, we will keep the request for future opportunities.&#13;&#13;With best regards, .&#13Hùng Cường, Hotel Owner.&#13&#13...&#13Holiday Crown.&#13Address: 24 Street 7, Bình An Ward, District 2.&#13Phone Number: 0908998923.&#13Hotline: (08).37404802.
+                        <textarea class="form-control" name="message" placeholder="Write something on reply.." rows="14">Dear ${activity.fullname}, &#13;&#13;Thank you for your interest in our hotel. This email is to acknowledge the receipt of your email and thank you for sending us your request. We will carefully review your request. Should your request match our ability, we will contact you soon. In other cases, we will keep the request for future opportunities.&#13;&#13;With best regards, &#13Hùng Cường, Hotel Owner.&#13&#13...&#13Holiday Crown.&#13Address: 24 Street 7, Bình An Ward, District 2.&#13Phone Number: 0908998923.&#13Hotline: (08).37404802.
                         </textarea>
                         <input type="hidden" name="activity-id" value="${activity.id}"/>
                         <input type="hidden" name="user-email" value="${activity.username}"/>
@@ -113,7 +104,7 @@
             <div class="panel-body">
                 <div class="twt-area">
                     <form action="${pageContext.request.contextPath}/send-mail.html" method="post" accept-charset="UTF-8">
-                        <textarea class="form-control" name="message" placeholder="Write something on reply.." rows="14">Dear ${activity.fullname}, &#13;&#13;Here is your booking information:&#13; - ${activity.details}.&#13; - ${activity.note}.&#13;&#13;Thank you for booking room in our hotel. This email is to acknowledge the receipt of your email and thank you for interest in our hotel. Should anything unexpectedly happen i will contact you immediately.&#13;&#13;With best regards, .&#13Hùng Cường, Hotel Owner.&#13&#13...&#13Holiday Crown.&#13Address: 24 Street 7, Bình An Ward, District 2.&#13Phone Number: 0908998923.&#13Hotline: (08).37404802.
+                        <textarea class="form-control" name="message" placeholder="Write something on reply.." rows="14">Dear ${activity.fullname}, &#13;&#13;Here is your booking information:&#13; - ${activity.details}.&#13; - ${activity.note}.&#13;&#13;Thank you for booking room in our hotel. This email is to acknowledge the receipt of your email and thank you for interest in our hotel. Should anything unexpectedly happen i will contact you immediately.&#13;&#13;With best regards, &#13Hùng Cường, Hotel Owner.&#13&#13...&#13Holiday Crown.&#13Address: 24 Street 7, Bình An Ward, District 2.&#13Phone Number: 0908998923.&#13Hotline: (08).37404802.
                         </textarea>
                         <input type="hidden" name="activity-id" value="${activity.id}"/>
                         <input type="hidden" name="user-email" value="${activity.username}"/>

@@ -56,10 +56,7 @@ public class ActivityDAOImpl implements ActivityDAO {
         ArrayList<Activity> activitylist = new ArrayList<>();
         while (cursor.hasNext()) {
             DBObject obj = cursor.next();
-            Activity act = gson.fromJson(obj + "", Activity.class);
-            act.setId(obj.get("_id") + "");
-            act.setTime(getDateTime(obj.get("created_at") + ""));
-            activitylist.add(act);
+            activitylist.add(getActivityDB(obj));
         }
         activitylist.sort(new Activity.CompareDateTime());
         return activitylist;
@@ -87,9 +84,7 @@ public class ActivityDAOImpl implements ActivityDAO {
         Activity act = new Activity();
         while (cursor.hasNext()) {
             DBObject obj = cursor.next();
-            act = gson.fromJson(obj + "", Activity.class);
-            act.setId(obj.get("_id") + "");
-            act.setTime(getDateTime(obj.get("created_at") + ""));
+            act = getActivityDB(obj);
         }
         Customer cus = customerDAO.getCustomerByUsername(act.getUsername());
         if(cus != null) {
@@ -114,5 +109,13 @@ public class ActivityDAOImpl implements ActivityDAO {
         document.append("$set", new BasicDBObject().append("response", "Seen"));
         BasicDBObject searchQuery = new BasicDBObject().append("_id", new ObjectId(id));
         collection.update(searchQuery, document);
+    }
+    
+    private Activity getActivityDB(DBObject obj) {
+    	Activity act = gson.fromJson(obj + "", Activity.class);
+        act.setId(obj.get("_id") + "");
+        act.setTime(getDateTime(obj.get("created_at") + ""));
+        act.setContent(act.getContent().replaceAll("\n", "<br>"));
+        return act;
     }
 }

@@ -314,6 +314,7 @@ public class MainController {
 	public String notification(@PathVariable(value = "id") String id, ModelMap model) {
 		userService.seenNotification(id);
 		model.put(AppData.REUSE_STRING[0], userService.getActivityBy(id));
+		model.put("emailTemplates", AppData.EMAIL_TEMPLATE_1);
 		initialize(model);
 		return "notification";
 	}
@@ -322,6 +323,7 @@ public class MainController {
 	public String replyBooking(@PathVariable(value = "id") String id, ModelMap model) {
 		userService.seenNotification(id);
 		model.put(AppData.REUSE_STRING[0], userService.getActivityBy(id));
+		model.put("emailTemplates", AppData.EMAIL_TEMPLATE_1);
 		initialize(model);
 		model.put("emailsent", "");
 		return AppData.REUSE_STRING[6];

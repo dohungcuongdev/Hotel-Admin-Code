@@ -27,7 +27,7 @@
                                             onclick="location.href = '${pageContext.request.contextPath}/notification/${activity.id}.html'"> ${activity.time}! 
                                     </strong>
                                     <br>UserName: ${activity.username}
-                                    <br>Sent content: ${activity.content}
+                                    <br><b>Sent content</b>: ${activity.content}
                                 </div>
                             </c:if>
                             <c:if test="${activity.click.equals('register')}"> 
@@ -39,7 +39,7 @@
                                             onclick="location.href = '${pageContext.request.contextPath}/notification/${activity.id}.html'"> ${activity.time}! 
                                     </strong>
                                     <br>UserName: ${activity.username}
-                                    <br>Received content: ${activity.content}
+                                    <br><b>Received content</b>: ${activity.content}
                                 </div>
                             </c:if>
                             <c:if test="${activity.name.equals('Book Room') || activity.name.equals('Cancel Room')}"> 
@@ -51,7 +51,7 @@
                                             onclick="location.href = '${pageContext.request.contextPath}/reply ${activity.name}/${activity.id}.html'"> ${activity.time}! 
                                     </strong>
                                     <br>UserName: ${activity.username}
-                                    <br>Received content: ${activity.content}
+                                    <br><b>Received content</b>: ${activity.content}
                                 </div>
                             </c:if>
                             <c:if test="${activity.click.equals('contact') || activity.click.equals('reservation')}"> 
@@ -63,7 +63,7 @@
                                             onclick="location.href = '${pageContext.request.contextPath}/notification/${activity.id}.html'"> ${activity.time}! 
                                     </strong>
                                     <br>${activity.username}
-                                    <br>Sent content: ${activity.content}
+                                    <br><b>Sent content</b>: ${activity.content}
                                 </div>
                             </c:if>
                         </c:forEach>
