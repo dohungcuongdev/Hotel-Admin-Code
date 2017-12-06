@@ -88,12 +88,14 @@
                         <textarea class="form-control" name="message" placeholder="Write something on reply.." rows="14">${emailTemplate}
                         </textarea>
                         <input type="hidden" name="activity-id" value="${activity.id}"/>
-                                               	<c:if test="${activity.click.equals('contact')}">
+                        <c:choose>
+                        <c:when test="${activity.click.equals('contact') || activity.click.equals('reservation')}">
                         <input type="hidden" name="user-email" value="${activity.username.replaceFirst("a guest with name: ", "").split(",")[1].replaceFirst(" email: ", "")}"/>
-                        </c:if>
-                        <c:if test="${!activity.click.equals('contact')}">
+                        </c:when>
+                        <c:otherwise>
                         <input type="hidden" name="user-email" value="${activity.username}"/>
-                        </c:if>
+                        </c:otherwise>
+                        </c:choose>
                         <input type="hidden" name="subject" value="${activity.name}"/>
 
                         <div class="clearfix">

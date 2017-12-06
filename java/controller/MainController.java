@@ -341,6 +341,7 @@ public class MainController {
 	public String sendMail(@RequestParam("activity-id") String id, @RequestParam("message") String message,
 			@RequestParam("user-email") String useremail, @RequestParam("subject") String subject, ModelMap model) {
 		model.put("emailsent", appService.sendEmail(appService.removeAccent(message), useremail, subject));
+		model.put("emailTemplates", AppData.EMAIL_TEMPLATE_1);
 		return replyEmail("reply " + subject, id, model);
 	}
 
