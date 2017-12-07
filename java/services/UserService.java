@@ -13,6 +13,7 @@ import model.user.tracking.Activity;
 import model.user.tracking.ChartData;
 import model.user.tracking.CustomerBehavior;
 import model.user.tracking.DataCollection;
+import model.user.tracking.ExternalIP;
 import model.user.tracking.FeedbackRoom;
 import model.user.Administrator;
 import model.user.Customer;
@@ -30,6 +31,8 @@ public interface UserService {
     
     public Map getFollowUsersMapByIP(List<FollowUsers> list);
     
+    public Map getMapByExternalIP(List<FollowUsers> list);
+    
     public Map getFollowUsersMapByOneIP(List<FollowUsers> list, String ip);
     
     public Map getMapFollowUsersCountry(List<FollowUsers> list);
@@ -44,7 +47,7 @@ public interface UserService {
     
     public List<ChartData> getListFollowUsersChartData(List<FollowUsers> list);
     
-    public Customer getCustomerByID(String id);
+    public ExternalIP getExternalIPDetails(String external_ip_address);
     
     public Customer getCustomerByUsername(String username);
 

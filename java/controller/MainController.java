@@ -70,12 +70,21 @@ public class MainController {
 
 	// checklogin
 	@RequestMapping(value = "check-login", method = RequestMethod.POST)
-	public String checklogin(@ModelAttribute(value = "loginbean") LoginBean loginbean, ModelMap model)
-			throws IOException {
+	public String checklogin(@ModelAttribute(value = "loginbean") LoginBean loginbean, ModelMap model) throws IOException {
 		if (loginbean.getUserName().equals("cuongvip1295@yahoo.com.vn") && loginbean.getPassword().equals("12101995")) {
 			return index(model);
 		}
 		return "login";
+	}
+	
+	@RequestMapping(value = "search-result/{keyword}", method = RequestMethod.GET)
+	public String searchResult(@PathVariable(value = "keyword") String keyword, ModelMap model) {
+		if(keyword!=null && !keyword.equals("")) {
+			initialize(model);
+			model.put("keyword", keyword);
+			model.put("cusDataCollection", userService.getDataCollection());
+		}
+		return "search-result";
 	}
 
 	// profile
@@ -175,15 +184,15 @@ public class MainController {
 		return manageRestaurant(model);
 	}
 
-	@RequestMapping(value = "service/{servicename}", method = RequestMethod.GET)
-	public String singleService(@PathVariable(value = "servicename") String servicename, ModelMap model) {
-		return initializeSingleService(model, servicename, AppData.REUSE_STRING[2]);
+	@RequestMapping(value = "service/{serviceid}", method = RequestMethod.GET)
+	public String singleService(@PathVariable(value = "serviceid") String serviceid, ModelMap model) {
+		return initializeSingleService(model, serviceid, AppData.REUSE_STRING[2]);
 	}
 
-	@RequestMapping(value = "edit-service/{servicename}", method = RequestMethod.GET)
-	public String editService(@PathVariable(value = "servicename") String servicename, ModelMap model) {
+	@RequestMapping(value = "edit-service/{serviceid}", method = RequestMethod.GET)
+	public String editService(@PathVariable(value = "serviceid") String serviceid, ModelMap model) {
 		model.addAttribute("serviceEdit", new HotelService());
-		return initializeSingleService(model, servicename, AppData.REUSE_STRING[4]);
+		return initializeSingleService(model, serviceid, AppData.REUSE_STRING[4]);
 	}
 
 	@RequestMapping(value = "service-edited", method = RequestMethod.POST)
@@ -197,26 +206,26 @@ public class MainController {
 			model.put(AppData.REUSE_STRING[2], serviceEdit);
 			model.put("relatedServices", hotelItemService.getRelatedHotelServices(serviceEdit.getType()));
 		} else {
-			return initializeSingleService(model, serviceEdit.getName(), AppData.REUSE_STRING[4]);
+			return initializeSingleService(model, serviceEdit.getId(), AppData.REUSE_STRING[4]);
 		}
 		return AppData.REUSE_STRING[4];
 	}
 
-	@RequestMapping(value = "remove-service/{servicename}", method = RequestMethod.GET)
-	public String removeService(@PathVariable(value = "servicename") String servicename, ModelMap model) {
-		hotelItemService.deleteService(servicename);
+	@RequestMapping(value = "remove-service/{serviceid}", method = RequestMethod.GET)
+	public String removeService(@PathVariable(value = "serviceid") String serviceid, ModelMap model) {
+		hotelItemService.deleteService(serviceid);
 		model.put("deleteResult", AppData.ABLE_TO_EDIT);
 		return manageRestaurant(model);
 	}
 
-	@RequestMapping(value = "service-img-edited/{servicename}", method = RequestMethod.POST)
+	@RequestMapping(value = "service-img-edited/{serviceid}", method = RequestMethod.POST)
 	public String serviceImgEdited(@RequestParam(value = "img1") CommonsMultipartFile img1,
 			@RequestParam(value = "img2") CommonsMultipartFile img2, HttpServletRequest request,
-			@PathVariable(value = "servicename") String servicename, ModelMap model) {
+			@PathVariable(value = "serviceid") String serviceid, ModelMap model) {
 		model.addAttribute("serviceEdit", new HotelService());
-		hotelItemService.editImageService(servicename, appService.uploadfile(img1, request, model, "restaurant"),
+		hotelItemService.editImageService(serviceid, appService.uploadfile(img1, request, model, "restaurant"),
 				appService.uploadfile(img2, request, model, "restaurant"));
-		return initializeSingleService(model, servicename, AppData.REUSE_STRING[4]);
+		return initializeSingleService(model, serviceid, AppData.REUSE_STRING[4]);
 	}
 
 	// users
@@ -233,6 +242,7 @@ public class MainController {
 		List<FollowUsers> list = userService.getListFollowUsers();
 		model.put("mapFollowUsers", userService.getFollowUsersMap(list));
 		model.put("mapFollowUsersIP", userService.getFollowUsersMapByIP(list));
+		model.put("mapsExternalIP", userService.getMapByExternalIP(list));
 		return "follow-users";
 	}
 
@@ -275,6 +285,13 @@ public class MainController {
 		model.put("listFollowUsers", list);
 		model.put("mapFollowUserIP", userService.getFollowUsersMapByOneIP(list, ip));
 		return "follow-user-ip";
+	}
+	
+	@RequestMapping(value = "ip-details/{externalip}", method = RequestMethod.GET)
+	public String ipDetails(@PathVariable(value = "externalip") String externalip, ModelMap model) {
+		initialize(model);
+		model.put("ipDetails", userService.getExternalIPDetails(externalip));
+		return "ip-details";
 	}
 
 	@RequestMapping(value = "user", method = RequestMethod.GET)
@@ -398,9 +415,9 @@ public class MainController {
 		return redirect;
 	}
 
-	private String initializeSingleService(ModelMap model, String servicename, String redirect) {
+	private String initializeSingleService(ModelMap model, String serviceid, String redirect) {
 		initialize(model);
-		HotelService service = hotelItemService.getHotelServiceByName(servicename);
+		HotelService service = hotelItemService.getHotelServiceByID(serviceid);
 		model.put(AppData.REUSE_STRING[2], service);
 		model.put("relatedServices", hotelItemService.getRelatedHotelServices(service.getType()));
 		return redirect;

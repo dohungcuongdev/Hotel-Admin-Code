@@ -8,6 +8,7 @@ package daos;
 import java.util.List;
 import java.util.Map;
 import model.user.tracking.ChartData;
+import model.user.tracking.ExternalIP;
 import model.user.tracking.FollowUsers;
 
 /**
@@ -20,6 +21,8 @@ public interface UserDAO {
     public Map getFollowUsersMap(List<FollowUsers> list);
     
     public Map getFollowUsersMapByIP(List<FollowUsers> list);
+    
+    public Map getMapByExternalIP(List<FollowUsers> list);
     
     public Map getFollowUsersMapByOneIP(List<FollowUsers> list, String ip);
     
@@ -34,4 +37,6 @@ public interface UserDAO {
     public Map getPageAccessChartDataByIP(String ipaddress, List<FollowUsers> list);
     
     public String getJSONPageAccess(Map m);
+    
+    public ExternalIP getExternalIPDetails(String external_ip_address);
 }

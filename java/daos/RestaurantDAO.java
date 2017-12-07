@@ -14,7 +14,7 @@ import model.hotel.HotelService;
  */
 public interface RestaurantDAO {
 
-    public HotelService getHotelServiceByName(String name);
+	public HotelService getHotelServiceByID(String id);
 
     public List<HotelService> getAllHotelServices();
     

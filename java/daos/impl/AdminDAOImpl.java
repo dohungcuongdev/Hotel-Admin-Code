@@ -9,7 +9,6 @@ import daos.AdminDAO;
 import com.google.gson.Gson;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.util.JSON;
 import database.MongoDBConnector;
@@ -46,11 +45,8 @@ public class AdminDAOImpl implements AdminDAO {
     public Administrator getAdminByUserName(String username) {
         BasicDBObject whereQuery = new BasicDBObject();
         whereQuery.put("username", username);
-        DBCursor cursor = collection.find(whereQuery);
-        while (cursor.hasNext()) {
-            return gson.fromJson(cursor.next().toString(), Administrator.class);
-        }
-        return null;
+        DBObject obj = collection.findOne(whereQuery);
+        return gson.fromJson(obj.toString(), Administrator.class);
     }
 
     @Override

@@ -27,7 +27,7 @@ public interface HotelItemService {
     
     public void deleteRoom(String id);
     
-    public HotelService getHotelServiceByName(String name);
+    public HotelService getHotelServiceByID(String id);
 
     public List<HotelService> getAllHotelServices();
     

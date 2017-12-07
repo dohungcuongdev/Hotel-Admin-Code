@@ -46,6 +46,47 @@
     <div class="col-xs-12">
         <div class="panel">
             <header class="panel-heading">
+                External IP Statistics
+
+            </header>
+            
+            <div class="box-tools m-b-15">
+                <div class="input-group">
+                    <input type="text" name="table_search" class="form-control input-sm pull-right" 
+                           style="width: 150px;" id="externalip-input" onkeyup="searchInputTable('externalip-input', 'externalip-table')" 
+                           placeholder="Search for ip address.." title="Type in a ip address"/>
+                    <div class="input-group-btn">
+                        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body table-responsive">
+                <table id="externalip-table">
+                    <tr id="tableHeader">
+                        <th class="tr-p" onclick="sortNum(0, 'externalip-table')">No.</th>
+                        <th class="tr-p" onclick="sortAlpha(1, 'externalip-table')">External IP</th>
+                        <th class="tr-p" onclick="sortNum(2, 'externalip-table')">Visit Times</th>
+                    </tr>
+
+                    <c:forEach var="map" items="${mapsExternalIP}" varStatus="loop">
+                        <tr>
+                            <td>${loop.index + 1}</td>
+                            <td><a href = "${pageContext.request.contextPath}/ip-details/${map.key}.html">${map.key}</a></td>
+                            <td>${map.value}</td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel">
+            <header class="panel-heading">
                 Page Access Statistics
             </header>
             <div class="box-tools m-b-15">

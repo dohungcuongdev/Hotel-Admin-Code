@@ -13,14 +13,14 @@
             </div>
         </div>
         <!-- search form -->
-        <form action="#" method="get" class="sidebar-form">
+        <div class="sidebar-form">
             <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search..." />
+                <input onclick="this.style.color='white'" id="search-all-input" type="text" name="q" class="form-control" placeholder="Search..."/>
                 <span class="input-group-btn">
-                    <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+                    <button onclick="searchAll('search-all-input')" name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
                 </span>
             </div>
-        </form>
+        </div>
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
@@ -85,3 +85,19 @@
     </section>
     <!-- /.sidebar -->
 </aside>
+
+<script>
+$("#search-all-input").keyup(function(event) {
+    if (event.keyCode === 13) {
+        $("#search-btn").click();
+    }
+});
+
+function searchAll(myInput) {
+	var keyword = document.getElementById(myInput).value;
+	if(keyword == null || keyword == '' )
+		swal("Oops...", "Please input keyword!", "warning");
+	else
+	window.location.href = '${pageContext.request.contextPath}/search-result/' + keyword + '.html';
+}
+</script>

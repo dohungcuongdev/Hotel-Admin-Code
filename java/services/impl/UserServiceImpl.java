@@ -16,6 +16,7 @@ import model.user.tracking.Activity;
 import model.user.tracking.ChartData;
 import model.user.tracking.CustomerBehavior;
 import model.user.tracking.DataCollection;
+import model.user.tracking.ExternalIP;
 import model.user.tracking.FeedbackRoom;
 import model.user.Administrator;
 import model.user.Customer;
@@ -74,6 +75,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public String getFollowUsersCountry(List<FollowUsers> list) {
         return userDAO.getFollowUsersCountry(list);
+    }
+    
+    @Override
+    public ExternalIP getExternalIPDetails(String external_ip_address) {
+    	return userDAO.getExternalIPDetails(external_ip_address);
     }
 
     @Override
@@ -202,8 +208,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Customer getCustomerByID(String id) {
-		return customerDAO.getCustomerByID(id);
+	public Map getMapByExternalIP(List<FollowUsers> list) {
+		return userDAO.getMapByExternalIP(list);
 	}
     
 }
