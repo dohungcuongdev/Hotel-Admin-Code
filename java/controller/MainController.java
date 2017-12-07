@@ -8,7 +8,6 @@ package controller;
 import java.io.IOException;
 import model.user.Administrator;
 import statics.AppData;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.user.tracking.Activity;
@@ -26,7 +24,6 @@ import model.hotel.HotelRoom;
 import model.hotel.HotelService;
 import model.user.Customer;
 import model.user.tracking.FollowUsers;
-
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -83,6 +80,7 @@ public class MainController {
 			initialize(model);
 			model.put("keyword", keyword);
 			model.put("cusDataCollection", userService.getDataCollection());
+			initializeFollowUser(model);
 		}
 		return "search-result";
 	}
@@ -239,10 +237,7 @@ public class MainController {
 	@RequestMapping(value = "follow-users", method = RequestMethod.GET)
 	public String followUsers(ModelMap model) {
 		initialize(model);
-		List<FollowUsers> list = userService.getListFollowUsers();
-		model.put("mapFollowUsers", userService.getFollowUsersMap(list));
-		model.put("mapFollowUsersIP", userService.getFollowUsersMapByIP(list));
-		model.put("mapsExternalIP", userService.getMapByExternalIP(list));
+		initializeFollowUser(model);
 		return "follow-users";
 	}
 
@@ -404,7 +399,13 @@ public class MainController {
 		model.put("totalMessage", listactivily.size() * 100);
 		model.put("totalRooms", listrooms.size() * 100);
 		model.put("totalServices", listservices.size() * 100);
-
+	}
+	
+	private void initializeFollowUser(ModelMap model) {
+		List<FollowUsers> list = userService.getListFollowUsers();
+		model.put("mapFollowUsers", userService.getFollowUsersMap(list));
+		model.put("mapFollowUsersIP", userService.getFollowUsersMapByIP(list));
+		model.put("mapsExternalIP", userService.getMapByExternalIP(list));
 	}
 
 	private String initializeSingleRoom(ModelMap model, String roomid, String redirect) {

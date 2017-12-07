@@ -12,9 +12,7 @@
          <th>Edit</th>
          <th>Del</th>
      </tr>
-
      <c:forEach var="room" items="${listrooms}" varStatus="loop">
-
          <tr>
              <td>${loop.index + 1}</td>
              <td>${room.name}</td>

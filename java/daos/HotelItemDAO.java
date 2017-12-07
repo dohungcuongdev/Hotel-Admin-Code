@@ -12,6 +12,5 @@ package daos;
 public interface HotelItemDAO {
     
     public void editImage(String id, String img, String img2);
-    
     public void deleteItem(String id);
 }

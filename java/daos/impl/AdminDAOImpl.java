@@ -15,11 +15,8 @@ import database.MongoDBConnector;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import org.springframework.stereotype.Repository;
-
 import model.user.Administrator;
-
 import static statics.provider.ImageEditor.editImagebyUserName;
 
 /**
@@ -30,10 +27,10 @@ import static statics.provider.ImageEditor.editImagebyUserName;
 @Repository
 public class AdminDAOImpl implements AdminDAO {
 
-    private final Gson gson = new Gson();
     private DBCollection collection;
+    private final Gson gson = new Gson();
 
-    {
+    public AdminDAOImpl() {
         try {
             collection = MongoDBConnector.createConnection("admin");
         } catch (UnknownHostException ex) {

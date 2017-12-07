@@ -374,4 +374,3 @@ function checkSendEmail(r) {
     else 
         swal('Oops...!', r, 'error');
 }
-

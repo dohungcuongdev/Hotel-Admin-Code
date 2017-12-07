@@ -1,12 +1,8 @@
 <%@ include file="common/sub-content.jspf"%>
-
-
 <div class="row">
     <div class="col-lg-4">
         <section class="panel">
-            <header class="panel-heading" style="font-weight: bold; color:red">
-                ${customer.name}
-            </header>
+            <header class="panel-heading" style="font-weight: bold; color:red">${customer.name}</header>
             <div class="panel-body">
                 <form role="form">
                     <div class="form-group"><strong>User Name</strong>: ${customer.username}</div>
@@ -15,16 +11,11 @@
                     <div class="form-group"><strong>Phone Number</strong>: ${customer.phone}</div>
                     <div class="form-group"><strong>Address</strong>: ${customer.address}</div>
                 </form>
-
             </div>
         </section>
-        <!--chat start-->
         <section class="panel">
-            <header class="panel-heading">
-                Notes
-            </header>
+            <header class="panel-heading">Notes</header>
             <div class="panel-body">
-
                 <div class="alert alert-info">
                     <strong>Booking!</strong> This is the booking request of this customer.
                 </div>
@@ -42,11 +33,8 @@
     </div>
     <div class="col-md-8">
         <section class="panel">
-            <header class="panel-heading">
-                List of Activity
-            </header>
+            <header class="panel-heading">List of Activity</header>
             <div class="panel-body" id="activity-box">
-
                 <c:forEach var="activity" items="${customer.activity}">
                     <c:if test="${activity.name.contains('Feedback')}"> 
                         <div class="alert alert-block alert-warning">
@@ -73,13 +61,7 @@
                         </div>
                     </c:if>
                 </c:forEach>
-
-
             </div>
         </section>
-
-    </div>
 </div>
-<!--row1-->
-
 <%@ include file="common/footer.jspf"%>

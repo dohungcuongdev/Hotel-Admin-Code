@@ -19,13 +19,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import org.springframework.stereotype.Repository;
-
 import model.user.tracking.ChartData;
 import model.user.tracking.ExternalIP;
 import model.user.tracking.FollowUsers;
-
 import static statics.provider.DateTimeCalculator.formatMillisecond;
 import static statics.provider.DateTimeCalculator.getDateTime;
 import static statics.provider.MathCalculator.round;

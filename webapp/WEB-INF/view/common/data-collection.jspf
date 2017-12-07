@@ -12,7 +12,6 @@
         <th>Del</th>
         <th>Ban</th>
     </tr>
-
     <c:forEach var="user" items="${cusDataCollection}" varStatus="loop">
         <tr>
             <td>${loop.index + 1}</td>

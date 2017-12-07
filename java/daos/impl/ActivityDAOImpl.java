@@ -6,23 +6,19 @@
 package daos.impl;
 
 import static statics.provider.DateTimeCalculator.getDateTime;
-
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.google.gson.Gson;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-
 import daos.ActivityDAO;
 import daos.CustomerDAO;
 import database.MongoDBConnector;
@@ -39,12 +35,10 @@ public class ActivityDAOImpl implements ActivityDAO {
 	
 	@Autowired
 	private CustomerDAO customerDAO;
-
-	private final Gson gson = new Gson();
-	
     private DBCollection collection;
+	private final Gson gson = new Gson();
 
-    {
+    public ActivityDAOImpl() {
         try {
             collection = MongoDBConnector.createConnection("activity");
         } catch (UnknownHostException ex) {

@@ -1,13 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="common/sub-content.jspf"%>
-
-
 <div class="row">
     <div class="col-xs-12">
         <div class="panel">
-            <header class="panel-heading">
-                Details for ${ipDetails.external_ip_address}
-            </header>
+            <header class="panel-heading">Details for ${ipDetails.external_ip_address}</header>
             <div class="panel-body table-responsive">
             	<table>
             		<tr><th>Details</th><th>Value</th></tr>
@@ -25,7 +21,4 @@
     <%@ include file="common/google-map.jspf"%>
     </div>            
 </div>
-
 <%@ include file="common/footer.jspf"%>
-
-<!-- http://freegeoip.net/json/20.139.146.50 -->

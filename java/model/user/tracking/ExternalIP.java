@@ -91,5 +91,4 @@ public class ExternalIP {
 		return "ExternalIP [external_ip_address=" + external_ip_address + ", range=" + range + ", country=" + country
 				+ ", region=" + region + ", city=" + city + ", ll=" + ll + ", metro=" + metro + ", zip=" + zip + "]";
 	}
-
 }

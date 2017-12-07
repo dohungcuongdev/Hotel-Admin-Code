@@ -7,10 +7,8 @@ package services.impl;
 
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import model.user.tracking.ActionTracking;
 import model.user.tracking.Activity;
 import model.user.tracking.ChartData;
@@ -211,5 +209,4 @@ public class UserServiceImpl implements UserService {
 	public Map getMapByExternalIP(List<FollowUsers> list) {
 		return userDAO.getMapByExternalIP(list);
 	}
-    
 }
