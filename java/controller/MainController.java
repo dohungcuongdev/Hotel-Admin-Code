@@ -19,6 +19,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.user.tracking.Activity;
+import model.ChangePasswordBean;
 import model.LoginBean;
 import model.hotel.HotelRoom;
 import model.hotel.HotelService;
@@ -81,7 +82,7 @@ public class MainController {
 		if (AppData.admin != null && username.equals(AppData.admin.getUsername())
 				&& password.equals(AppData.admin.getPassword())) {
 			request.getSession().setAttribute("username", username);
-			request.getSession().setMaxInactiveInterval(24*60*60);
+			request.getSession().setMaxInactiveInterval(24 * 60 * 60);
 			return index(model, request);
 		}
 		model.put("checkLogin", "Invalid username or password!");
@@ -112,9 +113,24 @@ public class MainController {
 	public String profile(ModelMap model, HttpServletRequest request) {
 		if (!isAuthenticated(request))
 			return "login";
-		initialize(model);
-		model.addAttribute("adminEdit", new Administrator());
-		return "profile";
+		return initializeProfile(model);
+	}
+
+	// profile
+	@RequestMapping(value = "change-password", method = RequestMethod.POST)
+	public String changePassword(@ModelAttribute(value = "changePassBean") ChangePasswordBean changePassBean,
+			ModelMap model, HttpServletRequest request) {
+		if (!isAuthenticated(request))
+			return "login";
+		String correctPassword = AppData.admin.getPassword();
+		String newPassword = changePassBean.getNewpassword();
+		model.put("pwCheckingResult", changePassBean.getPWCheckingResult(correctPassword));
+		if (changePassBean.isMatchPassword(correctPassword)) {
+			userService.updatePassword(AppData.admin.getUsername(), correctPassword,
+					changePassBean.getCurrentpassword(), newPassword, changePassBean.getConfirm());
+			AppData.admin.setPassword(newPassword);
+		}
+		return initializeProfile(model);
 	}
 
 	@RequestMapping(value = "profile-edited", method = RequestMethod.POST)
@@ -129,8 +145,7 @@ public class MainController {
 		} else {
 			model.put("editResult", AppData.INFOR_NOT_ENOUGH);
 		}
-		initialize(model);
-		return "profile";
+		return initializeProfile(model);
 	}
 
 	@RequestMapping(value = "profile-img-edited", method = RequestMethod.POST)
@@ -518,6 +533,13 @@ public class MainController {
 		model.put("totalMessage", listactivily.size() * 100);
 		model.put("totalRooms", listrooms.size() * 100);
 		model.put("totalServices", listservices.size() * 100);
+	}
+	
+	private String initializeProfile(ModelMap model) {
+		initialize(model);
+		model.addAttribute("adminEdit", new Administrator());
+		model.addAttribute("changePassBean", new ChangePasswordBean());
+		return "profile";
 	}
 
 	private void initializeFollowUser(ModelMap model) {
